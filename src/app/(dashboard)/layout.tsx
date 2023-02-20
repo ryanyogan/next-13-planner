@@ -2,6 +2,7 @@ import { GlassPane } from "@/components/glass-pane";
 import { Inter } from "@next/font/google";
 import clsx from "clsx";
 
+import { Sidebar } from "@/components/sidebar";
 import "@/styles/global.css";
 
 const inter = Inter({
@@ -19,6 +20,7 @@ export default function DashboardRootLayout({
       <head />
       <body className="h-screen w-screen candy-mesh p-6 font-sans">
         <GlassPane className="w-full h-full p-6 flex align-center container mx-auto">
+          <Sidebar />
           <main className="w-full pl-6 h-full">{children}</main>
         </GlassPane>
       </body>
