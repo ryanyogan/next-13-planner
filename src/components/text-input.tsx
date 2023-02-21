@@ -1,12 +1,10 @@
 import clsx from "clsx";
 
-export function TextInput({
-  className,
-  ...props
-}: {
+interface InputGroupProps extends React.ComponentPropsWithRef<"input"> {
   className?: string;
-  props?: any;
-}) {
+}
+
+export function TextInput({ className, ...props }: InputGroupProps) {
   return (
     <input
       className={clsx(
