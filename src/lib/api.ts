@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Project, User } from "@prisma/client";
 
 export async function fetcher({
   url,
@@ -45,5 +45,16 @@ export async function signin(user: Partial<User>) {
     method: "POST",
     body: user,
     json: false,
+  });
+}
+
+export async function createNewProject({
+  name,
+  description,
+}: Partial<Project>) {
+  return fetcher({
+    url: "/api/project",
+    method: "POST",
+    body: { name, description },
   });
 }

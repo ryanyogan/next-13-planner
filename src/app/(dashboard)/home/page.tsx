@@ -1,7 +1,8 @@
 import { Hero } from "@/components/hero";
 import { HeroSkeleton } from "@/components/hero-skeleton";
+import { NewProject } from "@/components/new-project";
 import { ProjectCard } from "@/components/project-cards";
-import { delay } from "@/lib/async";
+import { TaskCard } from "@/components/task-card";
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
@@ -9,7 +10,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 async function getData() {
-  await delay(2000);
   const user = await getUserFromCookie(cookies());
 
   const projects = await db.project.findMany({
@@ -21,11 +21,11 @@ async function getData() {
     },
   });
 
-  return { projects };
+  return { projects, user };
 }
 
 export default async function Home() {
-  const { projects } = await getData();
+  const { projects, user } = await getData();
 
   return (
     <div className="h-full overflow-y-auto pr-6 w-full">
@@ -44,9 +44,15 @@ export default async function Home() {
               </Link>
             </div>
           ))}
+          <div className="w-full md:w-1/2 lg:w-1/3 p-3">
+            <NewProject />
+          </div>
         </div>
         <div className="mt-6 flex-2 grow w-full flex">
-          <div className="w-full"></div>
+          <div className="w-full">
+            {/* @ts-ignore */}
+            <TaskCard user={user} title="Tasks" />
+          </div>
         </div>
       </div>
     </div>

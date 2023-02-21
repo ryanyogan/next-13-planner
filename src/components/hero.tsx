@@ -9,6 +9,7 @@ async function getData() {
   const user = await getUserFromCookie(cookies());
   return user;
 }
+
 export async function Hero() {
   const user = await getData();
 
